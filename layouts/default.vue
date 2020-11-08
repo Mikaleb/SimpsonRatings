@@ -1,52 +1,10 @@
 <template>
   <v-app :dark="goDark">
-    <v-navigation-drawer v-model="drawer" app>
-      <v-list dense>
-        <v-list-item link href="https://github.com/Epistol/S-Ratings">
-          <v-list-item-action>
-            <fa :icon="['fab', 'github']" />
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Github</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item link href="https://twitter.com/StolEpi">
-          <v-list-item-action>
-            <fa :icon="['fab', 'twitter']" />
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Twitter</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item class="d-flex justify-space-around items-center justify-end mt-4">
-          <about />
-        </v-list-item>
-      </v-list>
-      <template v-slot:append>
-        <div class="pa-2">
-          <v-btn
-            class="visible lg:invisible"
-            v-cloak
-            text
-            color="primary"
-            @click="goDark = !goDark"
-          >
-            <!-- <v-switch class="justify-space-around" v-model="goDark"> -->
-            <template v-if="!goDark">
-              <fa :icon="['far', 'moon']" />
-              <span class="pl-2">Night Mode</span>
-            </template>
-            <template v-else>
-              <fa :icon="['fas', 'sun']" />
-              <span class="pl-2">Light Mode</span>
-            </template>
-          </v-btn>
-        </div>
-      </template>
-    </v-navigation-drawer>
-
     <v-app-bar :clipped-left="clipped" fixed app>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" class="visible lg:invisible"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon
+        @click.stop="drawer = !drawer"
+        class="visible lg:invisible"
+      ></v-app-bar-nav-icon>
       <v-toolbar dense flat color="elevation-0" class="bg-transparent">
         <v-row>
           <v-col cols="2" />
@@ -64,7 +22,10 @@
               </v-flex>
             </v-toolbar-title>
           </v-col>
-          <v-col cols="2" class="d-flex justify-space-around items-center justify-end">
+          <v-col
+            cols="2"
+            class="items-center justify-end d-flex justify-space-around"
+          >
             <v-btn
               class="invisible lg:visible"
               v-cloak
@@ -86,7 +47,7 @@
             <v-btn
               class="invisible lg:visible"
               v-cloak
-              href="https://github.com/Epistol/S-Ratings"
+              href="https://github.com/Mikaleb/S-Ratings"
               text
               color="primary"
             >
@@ -97,20 +58,28 @@
         </v-row>
       </v-toolbar>
     </v-app-bar>
-    <v-content>
-      <v-container>
+    <v-main>
+      <v-container fluid>
         <nuxt />
       </v-container>
-    </v-content>
+    </v-main>
 
     <v-footer>
-      <span>&copy; {{ new Date().getFullYear() }} - Epistol</span>
+      <span
+        >&copy; 2020 -
+        {{
+          new Date().getFullYear() !== 2020
+            ? new Date().getFullYear() + ' - '
+            : ''
+        }}
+        Mikaleb</span
+      >
     </v-footer>
   </v-app>
 </template>
 
 <script lang="ts">
-import { defineComponent, watch, ref } from '@vue/composition-api'
+import { defineComponent, watch, ref } from '@nuxtjs/composition-api'
 import About from '~/components/About.vue'
 export default defineComponent({
   name: 'default',
