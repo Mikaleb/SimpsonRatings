@@ -1,52 +1,63 @@
 <template>
   <v-app>
-    <v-content>
-      <div class="w-full max-w-screen-xl mx-auto px-2">
-        <v-container fluid>
-          <div v-if="!showDetails">
-            <v-progress-circular indeterminate color="primary" />
-          </div>
-          <v-row no-gutters>
-            <v-col cols="12" sm="12">
-              <div v-if="showDetails" class="pb-4">
-                <div class="text-lg" v-if="showDetails">Show name : {{ showDetails.original_name }}</div>
-                <div v-if="showDetails">Seasons : {{ showDetails.number_of_seasons }}</div>
-                <div v-if="showDetails">Episodes : {{ showDetails.number_of_episodes }}</div>
+    <v-main>
+      <div class="w-full px-2">
+        <div v-if="!showDetails">
+          <v-progress-circular indeterminate color="primary" />
+        </div>
+        <v-row no-gutters>
+          <v-col cols="12" sm="12">
+            <div v-if="showDetails" class="pb-4">
+              <div class="text-lg" v-if="showDetails">
+                {{ showDetails.original_name }}
               </div>
-            </v-col>
-            <v-col cols="6">
-              <div>
-                <p>
-                  Seasons are on the horizontal axis ->
-                  <br />Episodes are on the vertical axis ↓
-                </p>
+              <div v-if="showDetails">
+                {{ showDetails.number_of_seasons }} Seasons
               </div>
-            </v-col>
-            <v-col cols="12" sm="12">
-              <div
-                v-if="seasons.length && showDetails && maxNbEpisodesPerSeason"
-                class="w-full max-w-screen-xl mx-auto px-4"
-              >
-                <TableBase :seasons="seasons" :max-nb-episodes-per-season="maxNbEpisodesPerSeason" />
+              <div v-if="showDetails">
+                {{ showDetails.number_of_episodes }} Episodes
               </div>
-              <div v-else>
-                <v-progress-circular indeterminate color="primary" />
-              </div>
-            </v-col>
-            <!-- <v-col cols="12" sm="12">
+            </div>
+          </v-col>
+          <v-col cols="6">
+            <div>
+              <p>
+                Seasons are on the horizontal axis ->
+                <br />Episodes are on the vertical axis ↓
+              </p>
+            </div>
+          </v-col>
+          <v-col cols="12" sm="12">
+            <div
+              v-if="seasons.length && showDetails && maxNbEpisodesPerSeason"
+              class="w-full px-4"
+            >
+              <TableBase
+                :seasons="seasons"
+                :max-nb-episodes-per-season="maxNbEpisodesPerSeason"
+              />
+            </div>
+            <div v-else>
+              <v-progress-circular indeterminate color="primary" />
+            </div>
+          </v-col>
+          <!-- <v-col cols="12" sm="12">
               <show-infos />
             </v-col>-->
-          </v-row>
-
-          <br />
-        </v-container>
+        </v-row>
+        <br />
       </div>
-    </v-content>
+    </v-main>
   </v-app>
 </template>
 
 <script lang="ts">
-import { defineComponent, Ref, reactive, onMounted } from '@vue/composition-api'
+import {
+  defineComponent,
+  Ref,
+  reactive,
+  onMounted,
+} from '@nuxtjs/composition-api'
 
 import TableBase from '~/components/Table/Base.vue'
 import useMovieApi from '@/composables/use-movie-api'
@@ -59,11 +70,14 @@ export default defineComponent({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setup(props, ctx) {
     const apiSelected = process.env.API_CHOICE ? process.env.API_CHOICE : 'TMDB'
-
     const {
+      //@ts-ignore
       showDetails, // easy to forget if we remove useProduct
+      //@ts-ignore
       seasons,
+      //@ts-ignore
       maxNbEpisodesPerSeason,
+      //@ts-ignore
       ratings,
       loadShowInfos,
     } = useMovieApi({ ctx, apiSelected })

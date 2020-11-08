@@ -16,11 +16,11 @@
         <v-card-text class="pt-4">
           <div class="mb-2">
             <p>
-              This website is a data table showing all
-              the notes given to the episodes of
-              <a
-                href="https://www.themoviedb.org/tv/456-the-simpsons"
-              >"The Simpsons"</a>
+              This website is a data table showing all the notes given to the
+              episodes of
+              <a href="https://www.themoviedb.org/tv/456-the-simpsons"
+                >"The Simpsons"</a
+              >
               by users from
               <a href="https://www.themoviedb.org/">TMDB</a>
             </p>
@@ -28,8 +28,9 @@
           <div>
             <p>
               Made by
-              <a href="https://epistol.fr">Epistol</a>, code available on
-              <a href="https://github.com/Epistol/S-Ratings">Github</a>
+              <a href="https://github.com/Mikaleb">Mikaleb</a>, code available
+              on
+              <a href="https://github.com/Mikaleb/S-Ratings">Github</a>
             </p>
           </div>
         </v-card-text>
@@ -38,7 +39,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api'
+import { defineComponent } from '@nuxtjs/composition-api'
 export default defineComponent({
   name: 'About',
   components: {},

@@ -1,8 +1,10 @@
 <template>
-  <!-- <th :key="cellData.value" class="hover:bg-gray-600 cursor-pointer" @click="dialog = !dialog">{{ cellData.text }}</th> -->
+  <!-- <th :key="cellData.value" class="cursor-pointer hover:bg-gray-600" @click="dialog = !dialog">{{ cellData.text }}</th> -->
   <v-dialog v-model="dialog" scrollable width="80%" class="overflow-y-hidden">
     <template v-slot:activator="{ dialog }">
-      <th class="hover:bg-gray-600 cursor-pointer" @click="toggleDialog()">{{ cellData.text }}</th>
+      <th class="cursor-pointer hover:bg-gray-600" @click="toggleDialog()">
+        {{ cellData.text }}
+      </th>
     </template>
     <v-card
       v-if="cellData.poster_path"
@@ -21,7 +23,7 @@
 
         <v-col cols="8" class>
           <v-card-text class="text--primary" max-height="300px">
-            <div v-if="cellData.overview">{{cellData.overview}}</div>
+            <div v-if="cellData.overview">{{ cellData.overview }}</div>
             <div v-else>No infos provided yet</div>
           </v-card-text>
         </v-col>
@@ -31,7 +33,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref } from '@vue/composition-api'
+import { defineComponent, computed, ref } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   name: 'HeadCell',
@@ -42,11 +44,15 @@ export default defineComponent({
   },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setup(props, ctx) {
-    const cellData: any = reactive(props.data)
+    const cellData = computed(() => (props.data ? props.data : null))
+
     let dialog = ref<boolean>(false)
     const toggleDialog = () => {
-      if (cellData && cellData?.poster_path) {
-        dialog.value = !dialog.value
+      if (cellData.value !== null) {
+        //@ts-ignore
+        if (cellData.value.poster_path) {
+          dialog.value = !dialog.value
+        }
       }
     }
     return { cellData, dialog, toggleDialog }

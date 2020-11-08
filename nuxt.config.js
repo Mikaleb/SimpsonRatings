@@ -30,7 +30,6 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '~/plugins/composition'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -39,6 +38,7 @@ export default {
     '@nuxt/typescript-build',
     '@nuxtjs/vuetify',
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/composition-api'
   ],
   /*
   ** Nuxt.js modules
@@ -109,6 +109,12 @@ export default {
       }
     }
   },
+
+  generate: {
+    // choose to suit your project
+    interval: 2000,
+  },
+
   /*
   ** Build configuration
   */

@@ -4,7 +4,12 @@
       <div
         class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg"
       >
-        <v-simple-table dense fixed-header class="min-w-full" :loading="loading">
+        <v-simple-table
+          dense
+          fixed-header
+          class="min-w-full"
+          :loading="loading"
+        >
           <thead>
             <tr>
               <template v-for="header in headers">
@@ -13,10 +18,10 @@
             </tr>
           </thead>
           <tbody v-if="cSeasons">
-            <template v-for="(ratings,key) in episodesRatings">
+            <template v-for="(ratings, key) in episodesRatings">
               <tr :key="key">
                 <th>{{ ratings.episodeNb + 1 }}</th>
-                <template v-for="(episodes) in ratings">
+                <template v-for="episodes in ratings">
                   <template v-for="(episode, season) in episodes">
                     <cell
                       v-if="season !== 'episodeNb'"
@@ -24,7 +29,6 @@
                       :data="episode"
                       :index="season"
                       :episodeNb="ratings.episodeNb + 1"
-                      @click="dialog = !dialog"
                     ></cell>
                   </template>
                 </template>
@@ -38,7 +42,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, computed, ref } from '@vue/composition-api'
+import {
+  defineComponent,
+  onMounted,
+  computed,
+  ref,
+} from '@nuxtjs/composition-api'
 import HeadCell from '~/components/Table/HeadCell.vue'
 import Cell from '~/components/Table/Cell.vue'
 import useMovieApi from '@/composables/use-movie-api'
@@ -109,9 +118,6 @@ export default defineComponent({
 
       loading = false
       return episodesObj
-      // return ratingsObj.map((obj: any) => {
-      //   return obj.episodeObj
-      // })
     }
 
     const getColor = (rating: number) => {
@@ -138,23 +144,12 @@ export default defineComponent({
     setHeaders()
     const episodesRatings = setRatingsPerEpisodeNb()
 
-    let dialog = ref<boolean>(false)
-    const toggleDialog = async (episodeNb: any) => {
-      const { getEpisodeInfos } = useMovieApi({ ctx, apiSelected })
-      dialog.value = !dialog.value
-      // if (episodeNb && dialog.value === true) {
-      //   apiData = await getEpisodeInfos(cellIndex.value, props.episodeNb)
-      // }
-    }
-
     return {
       getColor,
       headers,
       episodesRatings,
       loading,
       cSeasons,
-      dialog,
-      toggleDialog,
     }
   },
 })
