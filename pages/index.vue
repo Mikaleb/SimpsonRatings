@@ -8,6 +8,7 @@
         <v-row no-gutters>
           <v-col cols="12" sm="12">
             <div v-if="showDetails" class="pb-4">
+              <ShowResume :data="showDetails" />
               <div class="text-lg" v-if="showDetails">
                 {{ showDetails.original_name }}
               </div>
@@ -60,12 +61,14 @@ import {
 } from '@nuxtjs/composition-api'
 
 import TableBase from '~/components/Table/Base.vue'
+import ShowResume from '~/components/ShowResume.vue'
 import useMovieApi from '@/composables/use-movie-api'
 
 export default defineComponent({
   name: 'Index',
   components: {
     TableBase,
+    ShowResume,
   },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setup(props, ctx) {

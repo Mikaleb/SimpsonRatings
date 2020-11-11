@@ -58,11 +58,7 @@
         </v-row>
       </v-toolbar>
     </v-app-bar>
-    <v-main>
-      <v-container fluid>
-        <nuxt />
-      </v-container>
-    </v-main>
+    <nuxt />
 
     <v-footer>
       <span
