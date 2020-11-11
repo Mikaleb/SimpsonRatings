@@ -10,9 +10,7 @@
             <div v-if="showDetails" class="pb-4">
               <ShowResume
                 :data="showDetails"
-                gradient="to right,
-    rgba(252, 240, 8, 0.95) 150px,
-    rgba(100%, 83.53%, 11.76%, 0.84) 100%"
+                gradient="to right, rgba(3.14%, 14.51%, 40.39%, 1.00) 150px, rgba(7.06%, 20.39%, 50.59%, 0.84) 100%"
               />
             </div>
           </v-col>
@@ -78,7 +76,8 @@ export default defineComponent({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setup(props, ctx) {
     const apiSelected = process.env.API_CHOICE ? process.env.API_CHOICE : 'TMDB'
-    const tvShowId = '456-the-simpsons'
+    const tvShowId = '82856-the-mandalorian'
+
     const {
       //@ts-ignore
       showDetails, // easy to forget if we remove useProduct

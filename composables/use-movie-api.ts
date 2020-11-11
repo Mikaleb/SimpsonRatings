@@ -4,13 +4,17 @@ import { globalState } from "~/types/State";
 interface Options {
   ctx: SetupContext;
   apiSelected: string;
+  tvShowId: any;
 }
 
-export default function useMovieApi({ ctx, apiSelected = "TMDB" }: Options) {
+export default function useMovieApi({
+  ctx,
+  apiSelected = "TMDB",
+  tvShowId = "456-the-simpsons"
+}: Options) {
   // Setting up the endpoint with TMDB for now
   const endpoint: string =
     apiSelected === "TMDB" ? "https://api.themoviedb.org/3/tv/" : "";
-  const tvShowId = apiSelected === "TMDB" ? "456-the-simpsons" : "simpsons";
 
   const apiState: any = reactive({
     response: [],
@@ -76,6 +80,7 @@ export default function useMovieApi({ ctx, apiSelected = "TMDB" }: Options) {
   };
 
   const getEpisodeInfos = async (seasonNb: number, episodeNb: number) => {
+    console.log("tvShowId", tvShowId);
     if (seasonNb && episodeNb) {
       const url =
         apiSelected === "TMDB"

@@ -54,7 +54,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref } from '@nuxtjs/composition-api'
+import {
+  defineComponent,
+  reactive,
+  ref,
+  computed,
+} from '@nuxtjs/composition-api'
 import useMovieApi from '@/composables/use-movie-api'
 
 export default defineComponent({
@@ -69,18 +74,28 @@ export default defineComponent({
     episodeNb: {
       default: 0,
     },
+    pTvShowId: {
+      default: '',
+    },
   },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setup(props, ctx) {
+    const apiSelected = process.env.API_CHOICE ? process.env.API_CHOICE : 'TMDB'
+
+    const tvShowId = ref<any>(props.pTvShowId)
     const cellData = ref<any>(props.data)
     const episodeData = ref<any>(null)
-    const apiSelected = process.env.API_CHOICE ? process.env.API_CHOICE : 'TMDB'
     let apiData = reactive({})
 
     let dialog = ref<boolean>(false)
+    let tvShowIdData = tvShowId.value
 
     const toggleDialog = async () => {
-      const { getEpisodeInfos } = useMovieApi({ ctx, apiSelected })
+      const { getEpisodeInfos } = useMovieApi({
+        ctx,
+        apiSelected,
+        tvShowId: tvShowIdData,
+      })
 
       if (cellData.value !== null) {
         episodeData.value = await getEpisodeInfos(
@@ -89,13 +104,12 @@ export default defineComponent({
         )
         //@ts-ignore
         dialog.value = !dialog.value
-        console.log('toggleDialog -> dialog.value', dialog.value)
       }
     }
 
     const getColor = (rating: number) => {
       if (rating === 0) {
-        return 'bg-gray-500'
+        return 'bg-gray-500 cursor-pointer'
       }
       if (rating < 7) {
         return 'hover:bg-gray-600  cursor-pointer bg-red-500'
@@ -111,7 +125,7 @@ export default defineComponent({
       }
     }
 
-    return { cellData, getColor, dialog, toggleDialog, episodeData }
+    return { cellData, getColor, dialog, toggleDialog, episodeData, tvShowId }
   },
 })
 </script>

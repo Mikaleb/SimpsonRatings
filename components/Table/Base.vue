@@ -19,7 +19,7 @@
           </thead>
           <tbody v-if="cSeasons">
             <template v-for="(ratings, key) in episodesRatings">
-              <tr :key="key">
+              <tr :key="key" :id="key">
                 <th>{{ ratings.episodeNb + 1 }}</th>
                 <template v-for="episodes in ratings">
                   <template v-for="(episode, season) in episodes">
@@ -29,6 +29,7 @@
                       :data="episode"
                       :index="season"
                       :episodeNb="ratings.episodeNb + 1"
+                      :pTvShowId="cTvShowId"
                     ></cell>
                   </template>
                 </template>
@@ -65,10 +66,14 @@ export default defineComponent({
     maxNbEpisodesPerSeason: {
       default: 0,
     },
+    tvShowId: {
+      default: '',
+    },
   },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setup(props, ctx) {
     const cSeasons = computed(() => props.seasons)
+    const cTvShowId = computed(() => props.tvShowId)
     const cMaxEpisodesNb = computed(() => props.maxNbEpisodesPerSeason)
     const apiSelected = process.env.API_CHOICE ? process.env.API_CHOICE : 'TMDB'
 
@@ -150,6 +155,7 @@ export default defineComponent({
       episodesRatings,
       loading,
       cSeasons,
+      cTvShowId,
     }
   },
 })
