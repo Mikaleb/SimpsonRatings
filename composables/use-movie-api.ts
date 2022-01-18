@@ -43,7 +43,7 @@ export default function useMovieApi({
   };
 
   // Loading ratings array in the form of [ {seasonNb: 1, vote_avg: 7.3, seasonData: {...infos}}]
-  const setSeasonRatings = async (numberOfSeasons: number = 31) => {
+  const setSeasonRatings = async (numberOfSeasons = 31) => {
     const seasons = [];
     for (let seasonNb = 1; seasonNb <= numberOfSeasons; seasonNb++) {
       const seasonData = await getSeasonData(seasonNb);
