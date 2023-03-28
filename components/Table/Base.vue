@@ -132,17 +132,30 @@ export default defineComponent({
       if (rating === 0) {
         return 'bg-gray-500'
       }
-      if (rating < 7) {
-        return 'bg-red-500'
+      // from 0 to 5 : very bad
+      // 5 to 6 : bad
+      // 6 to 6.5 : mid
+      // 6.5 to 7.5: okay
+      // 7.5 to 8 : good
+      // above 8 : excellent
+      
+      if (rating < 5) {
+        return 'bg-red-700'
       }
-      if (rating < 8) {
+      if (rating < 6) {
+        return 'bg-red-600'
+      }
+      if (rating < 6.5) {
         return 'bg-orange-500'
       }
-      if (rating < 8.4) {
+      if (rating < 7.5) {
         return 'bg-yellow-500'
       }
-      if (rating >= 8) {
+      if (rating < 8) {
         return 'bg-green-500'
+      }
+      if (rating >= 8) {
+        return 'bg-green-400'
       }
     }
 
