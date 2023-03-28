@@ -111,13 +111,13 @@ export default defineComponent({
       if (rating === 0) {
         return 'bg-gray-500 cursor-pointer'
       }
-      if (rating < 7) {
+      if (rating < 6) {
         return 'hover:bg-gray-600  cursor-pointer bg-red-500'
       }
-      if (rating < 8) {
+      if (rating < 7) {
         return 'hover:bg-gray-600  cursor-pointer bg-orange-500'
       }
-      if (rating < 8.4) {
+      if (rating < 8) {
         return 'hover:bg-gray-600  cursor-pointer bg-yellow-500'
       }
       if (rating >= 8) {
