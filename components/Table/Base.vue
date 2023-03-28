@@ -139,24 +139,22 @@ export default defineComponent({
       // 7.5 to 8 : good
       // above 8 : excellent
       
-      if (rating < 5) {
+      if (rating < 5.5) {
         return 'bg-red-700'
       }
-      if (rating < 6) {
-        return 'bg-red-600'
-      }
       if (rating < 6.5) {
-        return 'bg-orange-500'
+        return 'bg-orange-600'
       }
       if (rating < 7.5) {
         return 'bg-yellow-500'
       }
-      if (rating < 8) {
-        return 'bg-green-500'
-      }
       if (rating >= 8) {
         return 'bg-green-400'
       }
+      if (rating < 8) {
+        return 'bg-green-500'
+      }
+      
     }
 
     setHeaders()
